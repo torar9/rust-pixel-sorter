@@ -1,0 +1,8 @@
+[package]
+name = "rust-graphical-sorting"
+version = "0.1.0"
+authors = ["Tomáš Silber <tomas.silber@outlook.cz>"]
+edition = "2019"
+
+[dependencies]
+image = "0.21.1"
