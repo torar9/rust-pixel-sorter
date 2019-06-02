@@ -2,26 +2,7 @@ extern crate image;
 
 use std::path::Path;
 
-fn bubble_sort(pixels:& mut Vec<u8>)
-{
-    println!("Sorting...");
-    println!("size: {}", pixels.len());
-    for i in (0..(pixels.len() - 5)).step_by(3)
-    {
-        for j in (0..(pixels.len() - i - 5)).step_by(3)
-        {
-            let left:u32 = (*pixels.get(j).unwrap() as u32) + (*pixels.get(j + 1).unwrap() as u32) + (*pixels.get(j + 2).unwrap() as u32);
-            let right:u32 = (*pixels.get(j + 3).unwrap() as u32) + (*pixels.get(j + 4).unwrap() as u32) + (*pixels.get(j + 5).unwrap() as u32);
-            if left < right
-            {
-                pixels.swap(j, j + 3);
-                pixels.swap(j + 1, j + 4);
-                pixels.swap(j + 2, j + 5);
-            }
-        }
-    }
-    println!("Sorting ended...");
-}
+mod sorter;
 
 fn buffer_into_file(pixels:& mut Vec<u8>, width:u32, height:u32)
 {
@@ -52,8 +33,11 @@ fn main()
             let mut img = image::open(&path).unwrap().to_rgb();
             let (width, height) = img.dimensions();
             let mut pixels = img.to_vec();
+            println!("size: {}", pixels.len());
 
-            bubble_sort(& mut pixels);
+            sorter::sort_by_red(& mut pixels);
+            sorter::sort_by_green(& mut pixels);
+            sorter::sort_by_blue(& mut pixels);
             buffer_into_file(& mut pixels, width, height);
         },
         Err(err) => {println!("Error: {}", err);}
