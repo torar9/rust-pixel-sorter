@@ -60,8 +60,8 @@ fn main()
             //sorter::sort_by_red(& mut pixels);
             //sorter::sort_by_green(& mut pixels);
             //sorter::sort_by_blue(& mut pixels);
-            save_raw_buffer_into_file(& mut pixels, "after.txt".to_string());
-            //buffer_into_file(& mut pixels, width, height);
+            //save_raw_buffer_into_file(& mut pixels, "after.txt".to_string());
+            buffer_into_file(& mut pixels, width, height);
         },
         Err(err) => {println!("Error: {}", err);}
     }
