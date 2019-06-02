@@ -54,11 +54,13 @@ fn main()
             let mut pixels = img.to_vec();
             println!("size: {}", pixels.len());
 
-            save_raw_buffer_into_file(&pixels, "data.txt".to_string());
+            sorter::sort_by_pixel_value(& mut pixels);
+            //sorter::sort_by_sum_of_rgb(& mut pixels);
+            //save_raw_buffer_into_file(&pixels, "data.txt".to_string());
             //sorter::sort_by_red(& mut pixels);
             //sorter::sort_by_green(& mut pixels);
             //sorter::sort_by_blue(& mut pixels);
-
+            save_raw_buffer_into_file(& mut pixels, "after.txt".to_string());
             //buffer_into_file(& mut pixels, width, height);
         },
         Err(err) => {println!("Error: {}", err);}
