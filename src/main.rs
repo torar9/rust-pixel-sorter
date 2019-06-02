@@ -26,7 +26,7 @@ fn print_buffer(pixels:& mut Vec<u8>)
 fn save_raw_buffer_into_file(pixels:& Vec<u8>, path:String)
 {
     let path = Path::new(&path);
-    match OpenOptions::new().create(true).write(true).append(false).open(&path)
+    match OpenOptions::new().create(true).write(true).truncate(true).append(false).open(&path)
     {
         Ok(mut file) =>
         {
@@ -60,7 +60,7 @@ fn main()
             //sorter::sort_by_red(& mut pixels);
             //sorter::sort_by_green(& mut pixels);
             //sorter::sort_by_blue(& mut pixels);
-            //save_raw_buffer_into_file(& mut pixels, "after.txt".to_string());
+            save_raw_buffer_into_file(& mut pixels, "after.txt".to_string());
             buffer_into_file(& mut pixels, width, height);
         },
         Err(err) => {println!("Error: {}", err);}
