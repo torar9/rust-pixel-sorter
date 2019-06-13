@@ -3,10 +3,10 @@ extern crate image;
 use std::fs::OpenOptions;
 use std::path::Path;
 use std::io::Write;
-use std::io::{BufRead, BufReader};
 
 mod sorter;
 
+#[allow(dead_code)]
 fn buffer_into_file(pixels:& mut Vec<u8>, width:u32, height:u32)
 {
     println!("Saving image...");
@@ -14,6 +14,7 @@ fn buffer_into_file(pixels:& mut Vec<u8>, width:u32, height:u32)
     println!("Image saved...");
 }
 
+#[allow(dead_code)]
 fn print_buffer(pixels:& mut Vec<u8>)
 {
     for i in 0..pixels.len()
@@ -23,7 +24,8 @@ fn print_buffer(pixels:& mut Vec<u8>)
     println!();
 }
 
-fn save_raw_buffer_into_file(pixels:& Vec<u8>, path:String)
+#[allow(dead_code)]
+fn save_buffer_into_file_as_text(pixels:& Vec<u8>, path:String)
 {
     let path = Path::new(&path);
     match OpenOptions::new().create(true).write(true).truncate(true).append(false).open(&path)
@@ -55,12 +57,6 @@ fn main()
             println!("size: {}", pixels.len());
 
             sorter::sort_by_pixel_value(& mut pixels);
-            //sorter::sort_by_sum_of_rgb(& mut pixels);
-            //save_raw_buffer_into_file(&pixels, "data.txt".to_string());
-            //sorter::sort_by_red(& mut pixels);
-            //sorter::sort_by_green(& mut pixels);
-            //sorter::sort_by_blue(& mut pixels);
-            save_raw_buffer_into_file(& mut pixels, "after.txt".to_string());
             buffer_into_file(& mut pixels, width, height);
         },
         Err(err) => {println!("Error: {}", err);}
